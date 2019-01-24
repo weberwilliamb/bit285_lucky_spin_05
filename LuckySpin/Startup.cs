@@ -17,6 +17,7 @@ namespace LuckySpin
         {
             services.AddTransient<LuckySpin.Models.TextTransformService>();
             services.AddMvc();
+            services.AddSingleton<LuckySpin.Models.Repository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

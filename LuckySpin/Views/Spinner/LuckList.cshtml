@@ -1,0 +1,26 @@
+﻿@model  IEnumerable<LuckySpin.Models.Spin>
+
+@{ 
+    Layout = "_Layout";
+}
+
+    <h1>All Your Luck</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Luck</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (LuckySpin.Models.Spin spin in Model)
+            {
+                <tr>
+                    <td>@spin.Luck</td>
+                    <td>@spin.IsWinner</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>

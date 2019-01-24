@@ -5,9 +5,9 @@
 }
 <h1>Lucky Spin</h1>
 <h2>Pick your Number</h2>
-<form action="/Spinner/Index" method="post">
+<form asp-for= "FirstName" action="/Spinner/Index" method="post">
     <fieldset>
-        <label><input placeholder=" Your First Name" name="FirstName" /><span></span></label>
+        <label><input asp-for="FirstName" placeholder=" Your First Name" name="FirstName" /><span asp-validation-for="FirstName"></span></label>
         <label>
             <select name="Luck">
                 <option selected disabled>Luck Number</option>
@@ -21,7 +21,7 @@
                 <option>8</option>
                 <option>9</option>
             </select>
-            <span></span>
+            <span asp-validation-for="Luck"></span>
         </label>
     </fieldset>
     <input type="submit" value="Start the Game" />
