@@ -7,6 +7,6 @@ namespace LuckySpin.Models
         public int B { get; set; }
         public int C { get; set; }
         public int Luck { get; set; }
-        public string Display { get; set; }
+        public bool IsWinner { get; set; }
     }
 }

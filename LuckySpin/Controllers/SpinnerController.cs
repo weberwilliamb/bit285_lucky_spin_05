@@ -9,6 +9,16 @@ namespace LuckySpin.Controllers
 {
     public class SpinnerController : Controller
     {
+        Random random;
+
+        /***
+         * Constructor
+         */
+        public SpinnerController()
+        {
+            random = new Random();
+        }
+
         /***
          * Entry Page Action
          **/
@@ -22,32 +32,39 @@ namespace LuckySpin.Controllers
         [HttpPost]
         public IActionResult Index(Player player)
         {
-            return RedirectToAction("SpinIt", player);
+            return RedirectToAction("Spin", player);
         }
 
         /***
          * Spin Action
          **/  
-               
-        Random random = new Random() ; 
-
-
-        public IActionResult SpinIt(Player player)
+        [HttpGet]       
+        public IActionResult Spin(Player player)
         {
-            Spin spin = new Spin();
-            spin.Luck = player.Luck;
-            spin.A = random.Next(1, 10);
-            spin.B = random.Next(1, 10);
-            spin.C = random.Next(1, 10);
+            // Create a Spin with its data
+            Spin spin = new Spin
+            {
+                Luck = player.Luck,
+                A = random.Next(1, 10),
+                B = random.Next(1, 10),
+                C = random.Next(1, 10)
+            };
+            spin.IsWinner = (spin.A == spin.Luck || spin.B == spin.Luck || spin.C == spin.Luck);
 
-            if (spin.A == spin.Luck ||spin.B == spin.Luck || spin.C == spin.Luck)
-                spin.Display = "block";
-            else
-                spin.Display = "none";
-
+            // Store some View data
+            ViewBag.Display = spin.IsWinner ? "block": "none";
             ViewBag.FirstName = player.FirstName;
 
-            return View("SpinIt", spin);
+            return View(spin);
+        }
+
+        /***
+         * List Action
+         */
+        [HttpGet]
+        public IActionResult LuckList()
+        {
+            return View();
         }
     }
 }
